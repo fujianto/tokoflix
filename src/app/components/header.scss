@@ -1,0 +1,23 @@
+@import 'app/root.scss';
+
+.header {
+  background: $main-bg;
+  color: $light-text;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  
+  a {
+    color: $light-text;
+    text-decoration: none;
+  }
+
+  .site-title {
+    margin-bottom: 0;
+    font-size: 30px;
+  }
+
+  .search-top {
+    margin: 0 20px;
+  }
+}

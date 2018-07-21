@@ -1,12 +1,9 @@
-export const GET_ACCOUNTS = 'GET_ACCOUNTS'
+export const GET_ACCOUNT = 'GET_ACCOUNT'
 
-export const getAccounts = (accounts) => {
+export const getAccount = () => {
   return (dispatch) => {
     dispatch({
-      type: GET_ACCOUNTS,
-      payload: {
-        accounts: accounts,
-      }
+      type: GET_ACCOUNT
     })
   }
 }
