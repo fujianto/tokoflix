@@ -1,0 +1,31 @@
+.movie-item {
+  width: 20%;
+  margin-bottom: 20px;
+  padding: 10px;
+  position: relative;
+  
+  .title {
+    font-size: 18px;
+    text-align: left;
+    margin: 10px 0 5px 0;
+  }
+
+  .price {
+    font-weight: 300;
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  .poster {
+    width: 100%;
+    height: auto;
+  }
+
+  .paid {
+    position: absolute;
+    top: 10px;
+    padding: 2px 15px;
+    background: crimson;
+    color: #fff;
+  }
+}

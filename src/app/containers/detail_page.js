@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
+import Header from 'app/components/header';
 
 export default class detail_page extends PureComponent {
   render() {
     return (
-      <div>
-        <h2>Detail Page</h2>
+      <div className='wrapper'>
+        <Header />
       </div>
     )
   }

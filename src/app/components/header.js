@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getAccount } from 'app/actions/accounts'
 import { Link } from 'react-router-dom';
 import style from './header.scss';
+import Helpers from 'app/helpers';
 
 class Header extends PureComponent {
   render() {
@@ -10,7 +11,7 @@ class Header extends PureComponent {
       <header className="header">
         <Link to="/"><h1 className="site-title">TokoFlix</h1></Link>
         <input type="text" className='form-control search-top' />
-        <h3 className='balance'> {this.props.account.balance}</h3>
+        <h3 className='balance'> { Helpers.convertToRupiah(this.props.account.balance) }</h3>
       </header>
     )
   }

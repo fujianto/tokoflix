@@ -1,0 +1,18 @@
+.movie-grid {
+  margin: 20px;
+
+  .grid-title {
+    text-align: center;
+  }
+
+  .grid-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .pagination {
+    a {
+      margin: 10px;
+    }
+  }
+}
