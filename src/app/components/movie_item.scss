@@ -29,3 +29,9 @@
     color: #fff;
   }
 }
+
+@media (max-width:560px) {
+  .movie-item {
+    width: 50%;
+  }
+}
