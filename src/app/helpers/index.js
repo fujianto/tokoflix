@@ -26,4 +26,28 @@ export default class Helpers {
       return 21250
     }
   }
+
+  static chunkArray(array, chunkSize) {
+    var chunks = [];
+    var temp = null;
+
+    for (var i = 0; i < array.length; i++) {
+      if (i % chunkSize === 0) {
+        temp = [];
+        chunks.push(temp);
+      }
+
+      temp.push(array[i]);
+    }
+
+    return chunks;
+  };
+
+  static sluggifyTitle(title) {
+    return title.split(" ").join("-").toLowerCase();
+  }
+
+  static getMovieIdFromPath(path) {
+    return path.split('-')[0]
+  }
 }

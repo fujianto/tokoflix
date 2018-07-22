@@ -6,3 +6,4 @@ export const ACCOUNT = {
 
 export const MOVIE_API_URL = `https://api.themoviedb.org/3/movie/`;
 export const MOVIE_API_KEY = `b94c62d7ead6da142c99ae2104c0ac34`;
+export const MOVIE_POSTER_PATH = `http://image.tmdb.org/t/p/w185`;

@@ -5,8 +5,8 @@ import { getAccount } from 'app/actions/accounts';
 import styles from './movie_grid.scss';
 import MovieItem from 'app/components/movie_item';
 import { MOVIE_API_URL, MOVIE_API_KEY } from 'app/config';
-import Movie from 'app/models/movie';
 import { Link } from 'react-router-dom';
+import Helpers from '../helpers';
 
 class MovieGrid extends PureComponent {
   constructor(props) {
@@ -34,25 +34,12 @@ class MovieGrid extends PureComponent {
         page: items.page,
         total_pages: items.total_pages
       });
-      this.props.getMovies(this.chunkArray(items.results, this.state.per_page)[this.state.page - 1]);
+
+      this.props.getMovies(Helpers.chunkArray(items.results, this.state.per_page)[this.state.page - 1]);
     }.bind(this));
   }
 
-  chunkArray(array, chunkSize) {
-    var chunks = [];
-    var temp = null;
-
-    for (var i = 0; i < array.length; i++) {
-      if (i % chunkSize === 0) {
-        temp = [];
-        chunks.push(temp);
-      }
-
-      temp.push(array[i]);
-    }
-
-    return chunks;
-  };
+  
 
   setPaidMovies(movies, paids) {
     for (let i = 0; i < movies.length; i++) {
@@ -97,7 +84,7 @@ class MovieGrid extends PureComponent {
             {
               this.props.movies.map((movie, index) => {
                 return (
-                  <Link to={`/?page=${index}`}>{index}</Link>
+                  <Link key={movie.id} to={`/?page=${index + 1}`}>{index + 1}</Link>
                 );
               })
             }
