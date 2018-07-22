@@ -7,14 +7,15 @@ import MovieItem from 'app/components/movie_item';
 import { MOVIE_API_URL, MOVIE_API_KEY } from 'app/config';
 import { Link } from 'react-router-dom';
 import Helpers from '../helpers';
+import { withRouter } from 'react-router';
+import queryString from 'query-string';
 
 class MovieGrid extends PureComponent {
   constructor(props) {
     super(props);
-    
     this.state = {
       page: 1,
-      total_pages: 0,
+      total_pages: this.props.movies.length,
       per_page: 10,
       movies: this.props.movies
     }
@@ -32,10 +33,11 @@ class MovieGrid extends PureComponent {
     }).then(function (items) {
       this.setState({
         page: items.page,
-        total_pages: items.total_pages
+        total_pages: items.total_pages,
+        movies: items.results
       });
 
-      this.props.getMovies(Helpers.chunkArray(items.results, this.state.per_page)[this.state.page - 1]);
+      this.props.getMovies(items.results);
     }.bind(this));
   }
 
@@ -65,13 +67,19 @@ class MovieGrid extends PureComponent {
     return result;
   }
 
+  onChangePage(e) {
+    this.setState({
+      page: +e.target.text
+    })
+  }
+
   render() {
     return (
       <div className='movie-grid'>
         <h3 className="grid-title">Latest Movies</h3>
         <div className="grid-wrapper">
           {
-            this.props.movies.map((movie, index) => {
+            Helpers.chunkArray(this.props.movies, this.state.per_page)[this.state.page - 1].map((movie, index) => {
               return (
                 <MovieItem key={index} movie={movie} />
               );
@@ -80,9 +88,9 @@ class MovieGrid extends PureComponent {
 
           <nav className="pagination">
             {
-              this.props.movies.map((movie, index) => {
+              Helpers.chunkArray(this.props.movies, this.state.per_page).map((movie, index) => {
                 return (
-                  <Link key={movie.id} to={`/?page=${index + 1}`}>{index + 1}</Link>
+                  <Link onClick={ (e) => this.onChangePage(e) } key={movie.id} to={`/?page=${index + 1}`}>{index + 1}</Link>
                 );
               })
             }
@@ -107,4 +115,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieGrid)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MovieGrid))

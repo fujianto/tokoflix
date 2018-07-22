@@ -13,14 +13,14 @@ class Root extends PureComponent {
   render() {
     return (
       <Provider store={store}>
-        {/* <PersistGate loading={null} persistor={persistor}> */}
+        <PersistGate loading={null} persistor={persistor}>
           <Router>
             <React.Fragment>
               <Route exact path='/' render={() => <HomePage />} />
               <Route exact path='/:movie_info' render={() => (<DetailPage />)} />
             </React.Fragment>
           </Router>
-        {/* </PersistGate> */}
+        </PersistGate>
       </Provider>
     );
   }

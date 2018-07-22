@@ -10,7 +10,6 @@ class Header extends Component {
     return (
       <header className="header">
         <Link to="/"><h1 className="site-title">TokoFlix</h1></Link>
-        <input type="text" className='form-control search-top' />
         <h3 className='balance'> { Helpers.convertToRupiah(this.props.account.balance) }</h3>
       </header>
     )

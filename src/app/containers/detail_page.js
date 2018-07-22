@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Header from 'app/components/header';
+import Header from 'app/components/header'; 
+import MovieWidget from 'app/components/movie_widget';
 import { withRouter } from 'react-router';
 import Helpers from 'app/helpers';
 import { connect } from 'react-redux';
@@ -58,34 +59,9 @@ class DetailPage extends Component {
     }
   }
 
-  convertToRupiah(num) {
-    var rupiah = '';
-    var numrev = num.toString().split('').reverse().join('');
-    for (var i = 0; i < numrev.length; i++)
-      if (i % 3 === 0) rupiah += numrev.substr(i, 3) + '.';
-
-    return 'Rp. ' + rupiah.split('', rupiah.length - 1).reverse().join('');
-  }
-
-  getPrice(rating) {
-    if (+rating <= 3) {
-      return 3500
-    }
-
-    if (+rating > 3 && +rating <= 6) {
-      return 8250;
-    }
-
-    if (+rating > 6 && +rating <= 8) {
-      return 16350
-    }
-
-    if (+rating > 8 && +rating <= 10) {
-      return 21250
-    }
-  }
-  
   render() {
+    const movie_id = +Helpers.getMovieIdFromPath(this.props.match.params.movie_info);
+
     return (
       <div className='wrapper'>
         <Header />
@@ -156,7 +132,8 @@ class DetailPage extends Component {
 
                 <div className="col-md-4">
                   <div className="widget">
-                    <h3 className="widget-title">Related Movies</h3>
+                    <MovieWidget widget_title='Similiar' movie_id={ movie_id } movie_type='similar' per_page={3} />
+                    <MovieWidget widget_title='Recommendation' movie_id={movie_id} movie_type='recommendations' per_page={3} />
                   </div>
                 </div>
               </div>
