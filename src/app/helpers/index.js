@@ -43,6 +43,22 @@ export default class Helpers {
     return chunks;
   };
 
+  static findOwnedMovie(movie, paids) {
+    let result = false;
+
+    for (let x = 0; x < paids.length; x++) {
+      if (typeof paids[x].id === 'undefined') {
+        return result;
+      }
+
+      if (paids[x].id === movie.id) {
+        return true;
+      }
+    }
+
+    return result;
+  }
+
   static sluggifyTitle(title) {
     return title.split(" ").join("-").toLowerCase();
   }

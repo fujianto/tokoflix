@@ -1,17 +1,10 @@
 import { ACCOUNT } from 'app/config'
-import { GET_ACCOUNT, SET_PAID_MOVIE } from 'app/actions/accounts'
+import { GET_ACCOUNT, BUY_MOVIE } from 'app/actions/accounts'
 
 const initialState = {
   account: ACCOUNT,
   paid_movies: [
-    {
-      "id": 238636,
-      "video": false,
-      "vote_average": 6.6,
-      "title": "The Purge: Anarchy",
-      "popularity": 85.364,
-      "poster_path": "/l1DRl40x2OWUoPP42v8fjKdS1Z3.jpg"
-    }
+   
   ]
 }
 
@@ -20,8 +13,10 @@ export const Accounts = (state = initialState, action) => {
     case GET_ACCOUNT:
       return state;
 
-    case SET_PAID_MOVIE:
+    case BUY_MOVIE:
       const newPaidMovie = state.paid_movies.concat(action.payload.paid_movie);
+      const newBalance = state.account.balance - action.payload.paid_movie.price;
+      const updatedAccount = newBalance > 0 ? state.account.balance = newBalance : state.account.balance = 0;
       return { ...state, paid_movies: newPaidMovie };
 
     default:
