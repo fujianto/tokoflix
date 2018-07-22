@@ -42,9 +42,9 @@ export default class MovieWidget extends PureComponent {
             this.state.movies.map((movie, index) => {
               return (
                 <div className="media" key={index}>
-                  <Link to={`/${movie.id}-${Helpers.sluggifyTitle(movie.title)}`}>
+                  <a href={`/${movie.id}-${Helpers.sluggifyTitle(movie.title)}`}>
                     <img style={{ maxWidth: '100px' } } className="align-self-start mr-3" src={`${MOVIE_POSTER_PATH}${movie.poster_path}`} alt="Poster" />
-                  </Link>
+                  </a>
 
                   <div className="media-body">
                     <h5 className="mt-0 title">{ movie.title }</h5>

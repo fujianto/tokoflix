@@ -25,20 +25,18 @@ class MovieGrid extends PureComponent {
     this.fetchMovies();
   }
 
-  fetchMovies(movies) {
+  async fetchMovies(movies) {
     const url = `${MOVIE_API_URL}popular?api_key=${MOVIE_API_KEY}&language=en-US&page=1`;
+    const response = await fetch(url);
+    const items = await response.json()
 
-    fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (items) {
-      this.setState({
-        page: items.page,
-        total_pages: items.total_pages,
-        movies: items.results
-      });
+    this.setState({
+      page: items.page,
+      total_pages: items.total_pages,
+      movies: items.results
+    });
 
-      this.props.getMovies(items.results);
-    }.bind(this));
+    this.props.getMovies(items.results);
   }
 
   setPaidMovies(movies, paids) {
@@ -79,20 +77,23 @@ class MovieGrid extends PureComponent {
         <h3 className="grid-title">Latest Movies</h3>
         <div className="grid-wrapper">
           {
-            Helpers.chunkArray(this.props.movies, this.state.per_page)[this.state.page - 1].map((movie, index) => {
-              return (
-                <MovieItem key={index} movie={movie} />
-              );
-            })
+            typeof Helpers.chunkArray(this.props.movies, this.state.per_page)[this.state.page - 1] !== 'undefined' ? 
+              Helpers.chunkArray(this.props.movies, this.state.per_page)[this.state.page - 1].map((movie, index) => {
+                return (
+                  <MovieItem key={index} movie={movie} />
+                );
+              }) 
+              : null
           }
 
           <nav className="pagination">
             {
-              Helpers.chunkArray(this.props.movies, this.state.per_page).map((movie, index) => {
-                return (
-                  <Link onClick={ (e) => this.onChangePage(e) } key={movie.id} to={`/?page=${index + 1}`}>{index + 1}</Link>
-                );
-              })
+              typeof Helpers.chunkArray(this.props.movies, this.state.per_page)!== 'undefined' ? 
+                Helpers.chunkArray(this.props.movies, this.state.per_page).map((movie, index) => {
+                  return (
+                    <Link onClick={ (e) => this.onChangePage(e) } key={movie.id} to={`/?page=${index + 1}`}>{index + 1}</Link>
+                  );
+                }) : null
             }
           </nav>
         </div>
