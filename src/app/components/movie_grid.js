@@ -8,7 +8,6 @@ import { MOVIE_API_URL, MOVIE_API_KEY } from 'app/config';
 import { Link } from 'react-router-dom';
 import Helpers from '../helpers';
 import { withRouter } from 'react-router';
-import queryString from 'query-string';
 
 class MovieGrid extends PureComponent {
   constructor(props) {
