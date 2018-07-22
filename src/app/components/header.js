@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getAccount } from 'app/actions/accounts'
 import { Link } from 'react-router-dom';
 import style from './header.scss';
 import Helpers from 'app/helpers';
 
-class Header extends PureComponent {
+class Header extends Component {
   render() {
     return (
       <header className="header">

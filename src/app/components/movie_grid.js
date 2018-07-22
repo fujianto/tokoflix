@@ -39,8 +39,6 @@ class MovieGrid extends PureComponent {
     }.bind(this));
   }
 
-  
-
   setPaidMovies(movies, paids) {
     for (let i = 0; i < movies.length; i++) {
       this.findOwnedMovie(movies[i], paids) ?

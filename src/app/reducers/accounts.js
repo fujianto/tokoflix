@@ -17,7 +17,13 @@ export const Accounts = (state = initialState, action) => {
       const newPaidMovie = state.paid_movies.concat(action.payload.paid_movie);
       const newBalance = state.account.balance - action.payload.paid_movie.price;
       const updatedAccount = newBalance > 0 ? state.account.balance = newBalance : state.account.balance = 0;
-      return { ...state, paid_movies: newPaidMovie };
+      const account = {
+        balance: updatedAccount,
+        username: state.account.username,
+        email: state.account.email
+      };
+
+      return { ...state, paid_movies: newPaidMovie, account: account };
 
     default:
       return state;
